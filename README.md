@@ -67,6 +67,15 @@ contracts/
 - Randomness comes from **on-chain block hashes** — provably fair, no black boxes.
 - All funds are held in the smart contracts; payouts execute automatically.
 
+## 📬 Contact
+
+- **Email:** [admin@poly39.io](mailto:admin@poly39.io)
+- **X / Twitter:** [@poly39io](https://x.com/poly39io)
+- **Poly39:** https://poly39.io
+- **XOIO:** https://xoio.io
+
+Interested in the Equity Partner Program or partnerships? Reach out anytime.
+
 ## ⚠️ Disclaimer
 
 This repository contains smart contract source code for transparency and audit purposes. Nothing here is financial advice. DeFi and on-chain gaming involve risk — always do your own research.
