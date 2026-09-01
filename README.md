@@ -6,17 +6,24 @@ Decentralized lottery and instant hash-betting games running entirely on **Polyg
 
 A fully decentralized 5-number lottery on Polygon.
 
-- **Contract:** `Poly39V6_Polygon`
-- **Mainnet address:** [`0x89072cD5859EfeDad2CF947A27622f126439f3C2`](https://polygonscan.com/address/0x89072cD5859EfeDad2CF947A27622f126439f3C2)
+### Contracts
+
+| Contract | Version | RNG | Status |
+|---|---|---|---|
+| `Poly39V6_Polygon` | V6 (legacy) | Block hash (pseudo-random) | **Mainnet** [`0x89072cD5859EfeDad2CF947A27622f126439f3C2`](https://polygonscan.com/address/0x89072cD5859EfeDad2CF947A27622f126439f3C2) — live, kept as backup |
+| `Poly39_VRF` | V7 (next) | **Chainlink VRF v2.5** (verifiable) | Amoy testnet — pending mainnet deployment |
+
 - **Site:** https://poly39.io
 
 ### How it works
 
 - Each round lasts **120 minutes** (90 min betting → 5 min draw buffer → 25 min distribution).
 - Players pick **5 numbers**; tickets are 5 USDT each.
-- Winning numbers are generated from the **Polygon block hash** at draw time — fully random and immutable, verifiable by anyone.
+- **V7 (`Poly39_VRF`)**: winning numbers are generated from **Chainlink VRF v2.5** — cryptographically verifiable randomness, provable on-chain.
+- **V6 (legacy)**: winning numbers from the Polygon block hash at draw time.
 - Prizes are distributed **automatically by the contract** to winners' wallets — no manual claims.
 - **1% management fee** per round, 60% of which is shared with equity partners.
+- **Round limits (V7):** max **1,500 tickets/round**, max **500 tickets/player** (anti-monopoly + gas safety).
 
 ### Prize structure
 
