@@ -10,8 +10,8 @@ A fully decentralized 5-number lottery on Polygon.
 
 | Contract | Version | RNG | Status |
 |---|---|---|---|
-| `Poly39V6_Polygon` | V6 (legacy) | Block hash (pseudo-random) | **Mainnet** [`0x89072cD5859EfeDad2CF947A27622f126439f3C2`](https://polygonscan.com/address/0x89072cD5859EfeDad2CF947A27622f126439f3C2) — live, kept as backup |
-| `Poly39_VRF` | V7 (next) | **Chainlink VRF v2.5** (verifiable) | Amoy testnet — pending mainnet deployment |
+| `Poly39V6_Polygon` | V6 (legacy) | Block hash (pseudo-random) | **Mainnet** [`0x89072cD5859EfeDad2CF947A27622f126439f3C2`](https://polygonscan.com/address/0x89072cD5859EfeDad2CF947A27622f126439f3C2) — paused backup |
+| `Poly39_VRF` | V7 (live) | **Chainlink VRF v2.5** (verifiable) | **Mainnet** [`0x7b3e0543b54a13688a4ee274576ef7c057bd83ac`](https://polygonscan.com/address/0x7b3e0543b54a13688a4ee274576ef7c057bd83ac) — **live** |
 
 - **Site:** https://poly39.io
 
@@ -36,11 +36,11 @@ A fully decentralized 5-number lottery on Polygon.
 
 ### Verification
 
-Every draw emits a `DrawExecuted(roundId, uint256[5] winningNumbers)` event — anyone can verify the 5 winning numbers directly on [Polygonscan](https://polygonscan.com/address/0x89072cD5859EfeDad2CF947A27622f126439f3C2#events).
+Every draw emits a `DrawExecuted(roundId, uint256[5] winningNumbers)` event — anyone can verify the 5 winning numbers directly on [Polygonscan](https://polygonscan.com/address/0x7b3e0543b54a13688a4ee274576ef7c057bd83ac#events). Each VRF request and fulfillment is also recorded on-chain by the [Chainlink VRF Coordinator](https://polygonscan.com/address/0xec0Ed46f36576541C75739E915ADbCb3DE24bD77) — independently auditable.
 
 ## ⚡ XOIO — On-Chain Hash Game
 
-Instant betting on the last hexadecimal character of a **block-hash-derived** random value.
+Instant betting on the last hexadecimal character of a **Chainlink VRF**-generated random value.
 
 - **Contracts:** `XOIOV2` → `XOIOV3` → `XOIOV4` (latest)
 - **Mainnet address (V4):** `0x932B485e0cc57Ca23Ca735984f7846d6A3c638E0`
@@ -58,11 +58,12 @@ Instant betting on the last hexadecimal character of a **block-hash-derived** ra
 ```
 contracts/
 ├── poly39/
-│   └── Poly39V6_Polygon.sol      # Lottery contract (mainnet)
+│   ├── Poly39V6_Polygon.sol      # Lottery contract V6 (legacy, paused backup)
+│   └── Poly39_VRF.sol            # Lottery contract V7 (mainnet, Chainlink VRF)
 └── xoio/
     ├── XOIOV2.sol                # Hash game v2
     ├── XOIOV3.sol                # Hash game v3
-    ├── XOIOV4.sol                # Hash game v4 (mainnet)
+    ├── XOIOV4.sol                # Hash game v4 (mainnet, Chainlink VRF)
     ├── XOIOV2_flattened.sol
     ├── XOIOV3_flattened.sol
     └── XOIOV4_flattened.sol
@@ -70,8 +71,8 @@ contracts/
 
 ## 🔒 Security
 
-- Both contracts are **verified on Polygonscan** — source code is public and auditable.
-- Randomness comes from **on-chain block hashes** — provably fair, no black boxes.
+- All contracts are **verified on Polygonscan** — source code is public and auditable.
+- **Randomness comes from Chainlink VRF v2.5** (Poly39 V7 & XOIO V4) — the industry-standard verifiable random function. Winning numbers/hashes are provably random and tamper-proof; every request and fulfillment is on-chain auditable.
 - All funds are held in the smart contracts; payouts execute automatically.
 
 ## 📬 Contact
